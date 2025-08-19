@@ -35,8 +35,7 @@ from genicam.gentl import TimeoutException
 # Local application/library specific imports
 from harvesters._private.core.helper.system import is_running_on_macos
 from harvesters.util.pfnc import is_custom, get_bits_per_pixel, \
-    bgr_formats
-from harvesters.util.pfnc import mono_location_formats, \
+    mono_location_formats, \
     rgb_formats, bgr_formats, \
     rgba_formats, bgra_formats, \
     bayer_location_formats
@@ -120,7 +119,7 @@ class CanvasBase(app.Canvas):
     def on_draw(self, event):
         # Update on June 15th, 2018:
         # According to a VisPy developer, they have not finished
-        # porting VisPy to PyQt5. Once they finished the development
+        # porting VisPy to PyQt6. Once they finished the development
         # we should try it out if it gives us the maximum refresh rate.
         # See the following URL to check the latest information:
         #

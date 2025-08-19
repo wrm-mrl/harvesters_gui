@@ -19,8 +19,8 @@
 
 
 import sys
-from PyQt5.QtWidgets import QApplication
-from harvesters_gui.frontend.pyqt5 import Harvester
+from PyQt6.QtWidgets import QApplication
+from harvesters_gui.frontend.pyqt6 import Harvester
 
 
 if __name__ == "__main__":

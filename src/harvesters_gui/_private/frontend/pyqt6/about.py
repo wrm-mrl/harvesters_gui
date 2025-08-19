@@ -22,16 +22,16 @@
 import sys
 
 # Related third party imports
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPainter, QPixmap
-from PyQt5.QtWidgets import QDialog, QApplication, QPlainTextEdit, \
+from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QPainter, QPixmap
+from PyQt6.QtWidgets import QDialog, QApplication, QPlainTextEdit, \
     QVBoxLayout, QHBoxLayout, QLineEdit, QFrame, QPushButton, \
     QTextEdit
 
 # Local application/library specific imports
 from harvesters.__init__ import __version__
 from harvesters_gui._helper import get_package_root
-from harvesters_gui._private.frontend.pyqt5.helper import get_system_font
+from harvesters_gui._private.frontend.pyqt6.helper import get_system_font
 
 
 class DecoratedDialog(QDialog):
@@ -154,7 +154,7 @@ class Acknowledgements(QDialog):
         content += 'Copyright (c) 2013-2018 VisPy developers\n'
         content += 'http://vispy.org/'
         content += '\n\n'
-        content += 'PyQt5 (GPL)\n'
+        content += 'PyQt6 (GPL)\n'
         content += 'Copyright (c) 2018 Riverbank Computing Limited\n'
         content += 'https://www.riverbankcomputing.com/'
         content += '\n\n'

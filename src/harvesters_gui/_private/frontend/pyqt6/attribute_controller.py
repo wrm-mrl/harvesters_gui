@@ -22,19 +22,19 @@
 import sys
 
 # Related third party imports
-from PyQt5.QtCore import pyqtSlot
-from PyQt5.QtGui import QKeySequence
-from PyQt5.QtWidgets import QMainWindow, QApplication, QTreeView, \
-    QAction, QComboBox, QLineEdit, QLabel, QShortcut
+from PyQt6.QtCore import pyqtSlot
+from PyQt6.QtGui import QKeySequence, QAction, QShortcut
+from PyQt6.QtWidgets import QMainWindow, QApplication, QTreeView, \
+    QComboBox, QLineEdit, QLabel
 
 from genicam.genapi import EVisibility
 
 # Local application/library specific imports
 from harvesters_gui._private.frontend.helper import compose_tooltip
-from harvesters_gui._private.frontend.pyqt5.action import Action
-from harvesters_gui._private.frontend.pyqt5.feature_tree import \
+from harvesters_gui._private.frontend.pyqt6.action import Action
+from harvesters_gui._private.frontend.pyqt6.feature_tree import \
     FeatureEditDelegate, FilterProxyModel, FeatureTreeModel
-from harvesters_gui._private.frontend.pyqt5.helper import get_system_font
+from harvesters_gui._private.frontend.pyqt6.helper import get_system_font
 
 """
 
@@ -42,7 +42,7 @@ If you got into a trouble relate to model, the following tool could give
 you a hint. ModelTest is a Python script and it tests your model and report
 the result:
 
-https://github.com/bgr/PyQt5_modeltest
+https://github.com/bgr/PyQt6_modeltest
 
 """
 

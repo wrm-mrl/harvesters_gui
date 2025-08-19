@@ -84,7 +84,7 @@ If you want to use Harvester GUI, then please invoke the following command:
 
     $ pip install harvesters_gui
 
-Note that ``PyQt5`` is distributed under LGPL and it may not be ideal for your purpose. In the future, we might support other GUI frameworks which are more or less open and free.
+Note that ``PyQt6`` is distributed under LGPL and it may not be ideal for your purpose. In the future, we might support other GUI frameworks which are more or less open and free.
 
 ***********************
 Launching Harvester GUI
@@ -95,8 +95,8 @@ To launch Harvester GUI, let's create a Python script file, naming ``harvester.p
 .. code-block:: python
 
     import sys
-    from PyQt5.QtWidgets import QApplication
-    from harvesters_gui.frontend.pyqt5 import Harvester
+    from PyQt6.QtWidgets import QApplication
+    from harvesters_gui.frontend.pyqt6 import Harvester
 
     if __name__ == '__main__':
         app = QApplication(sys.argv)
@@ -378,13 +378,13 @@ Harvester GUI uses the following open source libraries/resources:
   | http://vispy.org
   | https://github.com/vispy/vispy
 
-* PyQt5
+* PyQt6
 
   | License: `GPLv3 <https://www.gnu.org/licenses/gpl-3.0.en.html>`_
   | Copyright (c) 2018 Riverbank Computing Limited
 
   | https://www.riverbankcomputing.com
-  | https://pypi.org/project/PyQt5/
+  | https://pypi.org/project/PyQt6/
 
 * Icons8
 

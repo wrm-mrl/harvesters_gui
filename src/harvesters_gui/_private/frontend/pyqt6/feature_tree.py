@@ -23,18 +23,18 @@ import re
 import sys
 
 # Related third party imports
-from PyQt5.Qt import Qt, QStyledItemDelegate, QColor
-from PyQt5.QtCore import QAbstractItemModel, QModelIndex, \
-    QSortFilterProxyModel
-from PyQt5.QtWidgets import QApplication, QTreeView, \
+from PyQt6.QtGui import QColor
+from PyQt6.QtCore import QAbstractItemModel, QModelIndex, \
+    QSortFilterProxyModel, Qt
+from PyQt6.QtWidgets import QApplication, QTreeView, \
     QSpinBox, QPushButton, QComboBox, QWidget, \
-    QLineEdit
+    QLineEdit, QStyledItemDelegate
 
 from genicam.genapi import NodeMap
 from genicam.genapi import EInterfaceType, EAccessMode, EVisibility
 
 # Local application/library specific imports
-from harvesters_gui._private.frontend.pyqt5.helper import get_system_font
+from harvesters_gui._private.frontend.pyqt6.helper import get_system_font
 
 
 class TreeItem(object):

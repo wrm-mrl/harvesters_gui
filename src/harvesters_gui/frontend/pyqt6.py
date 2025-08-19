@@ -22,13 +22,12 @@
 import datetime
 import os
 import sys
-import time
 
 # Related third party imports
-from PyQt5.QtCore import QMutexLocker, QMutex, pyqtSignal, QThread
-from PyQt5.QtGui import QKeySequence
-from PyQt5.QtWidgets import QMainWindow, QAction, QComboBox, \
-    QDesktopWidget, QFileDialog, QDialog, QShortcut, QApplication
+from PyQt6.QtCore import QMutex, pyqtSignal #, QThread, QMutexLocker
+from PyQt6.QtGui import QKeySequence, QAction, QShortcut, QGuiApplication
+from PyQt6.QtWidgets import QMainWindow, QComboBox, \
+    QFileDialog, QDialog, QApplication
 
 from genicam.gentl import NotInitializedException, InvalidHandleException, \
     InvalidIdException, ResourceInUseException, \
@@ -39,14 +38,14 @@ from genicam.gentl import NotInitializedException, InvalidHandleException, \
 from harvesters.core import Harvester as HarvesterCore, ParameterSet, ParameterKey
 from harvesters_gui._private.frontend.canvas import Canvas2D
 from harvesters_gui._private.frontend.helper import compose_tooltip
-from harvesters_gui._private.frontend.pyqt5.about import About
-from harvesters_gui._private.frontend.pyqt5.action import Action
-from harvesters_gui._private.frontend.pyqt5.attribute_controller import AttributeController
-from harvesters_gui._private.frontend.pyqt5.device_list import ComboBoxDeviceList
-from harvesters_gui._private.frontend.pyqt5.display_rate_list import ComboBoxDisplayRateList
-from harvesters_gui._private.frontend.pyqt5.helper import get_system_font
-from harvesters_gui._private.frontend.pyqt5.icon import Icon
-from harvesters_gui._private.frontend.pyqt5.thread import _PyQtThread
+from harvesters_gui._private.frontend.pyqt6.about import About
+from harvesters_gui._private.frontend.pyqt6.action import Action
+from harvesters_gui._private.frontend.pyqt6.attribute_controller import AttributeController
+from harvesters_gui._private.frontend.pyqt6.device_list import ComboBoxDeviceList
+from harvesters_gui._private.frontend.pyqt6.display_rate_list import ComboBoxDisplayRateList
+from harvesters_gui._private.frontend.pyqt6.helper import get_system_font
+from harvesters_gui._private.frontend.pyqt6.icon import Icon
+from harvesters_gui._private.frontend.pyqt6.thread import _PyQtThread
 from harvesters.util.logging import get_logger
 
 
@@ -177,7 +176,8 @@ class Harvester(QMainWindow):
 
         # Place it in the center.
         rectangle = self.frameGeometry()
-        coordinate = QDesktopWidget().availableGeometry().center()
+        coordinate = QGuiApplication.primaryScreen().availableGeometry().center()
+        # coordinate = QDesktopWidget().availableGeometry().center() TODO delete if ok
         rectangle.moveCenter(coordinate)
         self.move(rectangle.topLeft())
 
