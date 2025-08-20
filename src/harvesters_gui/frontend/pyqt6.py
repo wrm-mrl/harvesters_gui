@@ -68,7 +68,8 @@ class Harvester(QMainWindow):
 
         profile = True if 'HARVESTER_PROFILE' in os.environ else False
         self._harvester_core = HarvesterCore(
-            profile=profile, logger=self._logger
+            # profile=profile, logger=self._logger,
+            config=ParameterSet({ParameterKey._ENABLE_PROFILE: profile, ParameterKey.LOGGER: self._logger})
         ) # FIXME soon to be deprecated fields
         self._ia = None  # Image Acquirer
 
@@ -505,6 +506,19 @@ class Harvester(QMainWindow):
 
         try:
             if self.ia.remote_device.node_map:
+                # TODO See if the below can be loaded from a profile
+                # self.ia.remote_device.node_map.Width.value = 1440
+                # self.ia.remote_device.node_map.Height.value = 1080
+                # self.ia.remote_device.node_map.PixelFormat.value = "Mono8"
+                # # self.ia.remote_device.node_map.ExposureAuto.value = "Continuous"
+                # # self.ia.remote_device.node_map.GainAuto.value = "Continuous"
+                # self.ia.remote_device.node_map.ExposureTime.value = 4.
+                # self.ia.remote_device.node_map.Gain.value = 10.
+                # self.ia.remote_device.node_map.GammaEnable.value = True
+                # self.ia.remote_device.node_map.Gamma.value = 1.0
+                # self.ia.remote_device.node_map.LUTEnable.value = True
+                # self.ia.remote_device.node_map.LUTValue.value = 400
+
                 self._widget_attribute_controller = \
                     AttributeController(
                         self.ia.remote_device.node_map,
