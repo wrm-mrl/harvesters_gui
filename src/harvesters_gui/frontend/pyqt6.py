@@ -22,6 +22,8 @@
 import datetime
 import os
 import sys
+import struct
+from pathlib import Path
 
 # Related third party imports
 from PyQt6.QtCore import QMutex, pyqtSignal #, QThread, QMutexLocker
@@ -69,6 +71,15 @@ class Harvester(QMainWindow):
             profile=profile, logger=self._logger
         ) # FIXME soon to be deprecated fields
         self._ia = None  # Image Acquirer
+
+        cti_files = list(
+            Path("C:\Program Files (x86)\Common Files\MVS\Runtime\Win64_x64") # FIXME add the files to the repo
+            .resolve()
+            .glob("*.cti")
+        )
+        for f in cti_files:
+            self._harvester_core.add_file(str(f))
+        self._harvester_core.update()
 
         #
         self._widget_canvas = Canvas2D(vsync=vsync)
@@ -566,6 +577,17 @@ class Harvester(QMainWindow):
             if self.ia:
                 enable = True
         return enable
+    
+    def turn_on_cavitar_laser(self):
+        port = self.ia.remote_device.port
+        port.write(0x00030D84, struct.pack(">I", 0x00000000))
+        port.write(0x00030DA8, struct.pack(">I", 0x00000000))
+        port.write(0x00030FA8, struct.pack(">I", 0x00000003))
+        port.write(0x00030D84, struct.pack(">I", 0x00000004))
+
+    def turn_off_cavitar_laser(self):
+        port = self.ia.remote_device.port
+        port.write(0x00030D84, struct.pack(">I", 0x00000000))
 
     def action_on_start_image_acquisition(self):
         if self.ia.is_acquiring():
@@ -578,7 +600,7 @@ class Harvester(QMainWindow):
             self.ia.statistics.reset()
             self._thread_statistics_measurement.start()
 
-            # TODO Turn On Laser
+            self.turn_on_cavitar_laser() # FIXME isn't exactly robust
             self.ia.start()
 
     def is_enabled_on_start_image_acquisition(self):
@@ -600,6 +622,7 @@ class Harvester(QMainWindow):
         self.canvas.release_buffers()
 
         # Then we stop image acquisition:
+        self.turn_off_cavitar_laser() # FIXME
         self.ia.stop()
 
         # Initialize the drawing state:
