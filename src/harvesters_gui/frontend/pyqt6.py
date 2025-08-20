@@ -67,7 +67,7 @@ class Harvester(QMainWindow):
         profile = True if 'HARVESTER_PROFILE' in os.environ else False
         self._harvester_core = HarvesterCore(
             profile=profile, logger=self._logger
-        )
+        ) # FIXME soon to be deprecated fields
         self._ia = None  # Image Acquirer
 
         #
@@ -147,7 +147,7 @@ class Harvester(QMainWindow):
 
     @property
     def cti_files(self):
-        return self.harvester_core.cti_files
+        return self.harvester_core.files
 
     @property
     def harvester_core(self):
@@ -315,7 +315,7 @@ class Harvester(QMainWindow):
         #
         self._widget_device_list = ComboBoxDeviceList(self)
         self._widget_device_list.setSizeAdjustPolicy(
-            QComboBox.AdjustToContents
+            QComboBox.SizeAdjustPolicy.AdjustToContents
         )
         shortcut_key = 'Ctrl+Shift+d'
         shortcut = QShortcut(QKeySequence(shortcut_key), self)
@@ -336,7 +336,7 @@ class Harvester(QMainWindow):
         #
         self._widget_display_rates = ComboBoxDisplayRateList(self)
         self._widget_display_rates.setSizeAdjustPolicy(
-            QComboBox.AdjustToContents
+            QComboBox.SizeAdjustPolicy.AdjustToContents
         )
         shortcut_key = 'Ctrl+Shift+r'
         shortcut = QShortcut(QKeySequence(shortcut_key), self)
@@ -529,9 +529,9 @@ class Harvester(QMainWindow):
         dialog = QFileDialog(self)
         dialog.setWindowTitle('Select a CTI file to load')
         dialog.setNameFilter('CTI files (*.cti)')
-        dialog.setFileMode(QFileDialog.ExistingFile)
+        dialog.setFileMode(QFileDialog.FileMode.ExistingFile)
 
-        if dialog.exec_() == QDialog.Accepted:
+        if dialog.exec() == QDialog.DialogCode.Accepted:
             #
             file_path = dialog.selectedFiles()[0]
 
@@ -578,6 +578,7 @@ class Harvester(QMainWindow):
             self.ia.statistics.reset()
             self._thread_statistics_measurement.start()
 
+            # TODO Turn On Laser
             self.ia.start()
 
     def is_enabled_on_start_image_acquisition(self):
@@ -767,4 +768,4 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     harvester = Harvester(vsync=True)
     harvester.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())

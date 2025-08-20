@@ -27,4 +27,4 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     h = Harvester()
     h.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())

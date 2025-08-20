@@ -102,7 +102,7 @@ To launch Harvester GUI, let's create a Python script file, naming ``harvester.p
         app = QApplication(sys.argv)
         h = Harvester()
         h.show()
-        sys.exit(app.exec_())
+        sys.exit(app.exec())
 
 Then launch ``harvester.py``:
 

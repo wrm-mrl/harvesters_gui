@@ -169,7 +169,7 @@ class Acknowledgements(QDialog):
         self._text = QPlainTextEdit(content)
         self._text.setReadOnly(True)
         self._text.setFont(get_system_font())
-        self._text.setLineWrapMode(True)
+        self._text.setLineWrapMode(QPlainTextEdit.LineWrapMode.WidgetWidth)
         self._text.setFixedWidth(480)
 
         layout.addWidget(self._text)
@@ -180,4 +180,4 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     about = About()
     about.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
