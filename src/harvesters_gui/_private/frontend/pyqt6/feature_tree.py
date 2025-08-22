@@ -219,24 +219,24 @@ class FeatureTreeModel(QAbstractItemModel):
 
     def flags(self, index):
         if not index.isValid():
-            return Qt.NoItemFlags
+            return Qt.ItemFlag.NoItemFlags
 
         tree_item = index.internalPointer()
         feature = tree_item.own_data[0]
         access_mode = feature.node.get_access_mode()
 
         if access_mode in self._editables:
-            ret = Qt.ItemIsEnabled | Qt.ItemIsEditable
+            ret = Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsEditable
         else:
             if index.column() == 1:
-                ret = Qt.NoItemFlags
+                ret = Qt.ItemFlag.NoItemFlags
             else:
-                ret = Qt.ItemIsEnabled
+                ret = Qt.ItemFlag.ItemIsEnabled
         return ret
 
     def headerData(self, p_int, Qt_Orientation, role=None):
         # p_int: section
-        if Qt_Orientation == Qt.Horizontal and role == Qt.ItemDataRole.DisplayRole:
+        if Qt_Orientation == Qt.Orientation.Horizontal and role == Qt.ItemDataRole.DisplayRole:
             return self.root_item.data(p_int)
         return None
 
@@ -380,7 +380,7 @@ class FeatureEditDelegate(QStyledItemDelegate):
         if interface_type == EInterfaceType.intfIInteger:
             editor.setValue(int(value))
         elif interface_type == EInterfaceType.intfIBoolean:
-            i = editor.findText(value, Qt.MatchFixedString)
+            i = editor.findText(value, Qt.MatchFlag.MatchFixedString)
             editor.setCurrentIndex(i)
         elif interface_type == EInterfaceType.intfIEnumeration:
             editor.setEditText(value)

@@ -23,7 +23,7 @@ import datetime
 import os
 import sys
 import struct
-from pathlib import Path
+# from pathlib import Path
 
 # Related third party imports
 from PyQt6.QtCore import QMutex, pyqtSignal #, QThread, QMutexLocker
@@ -73,13 +73,13 @@ class Harvester(QMainWindow):
         ) # FIXME soon to be deprecated fields
         self._ia = None  # Image Acquirer
 
-        cti_files = list(
-            Path("C:\Program Files (x86)\Common Files\MVS\Runtime\Win64_x64") # FIXME add the files to the repo
-            .resolve()
-            .glob("*.cti")
-        )
-        for f in cti_files:
-            self._harvester_core.add_file(str(f))
+        # cti_files = list(
+        #     Path("C:\Program Files (x86)\Common Files\MVS\Runtime\Win64_x64") # FIXME add the files to the repo
+        #     .resolve()
+        #     .glob("*.cti")
+        # )
+        # for f in cti_files:
+        #     self._harvester_core.add_file(str(f))
         self._harvester_core.update()
 
         #
@@ -614,7 +614,7 @@ class Harvester(QMainWindow):
             self.ia.statistics.reset()
             self._thread_statistics_measurement.start()
 
-            self.turn_on_cavitar_laser() # FIXME isn't exactly robust
+            # self.turn_on_cavitar_laser() # FIXME isn't exactly robust
             self.ia.start()
 
     def is_enabled_on_start_image_acquisition(self):
@@ -636,7 +636,7 @@ class Harvester(QMainWindow):
         self.canvas.release_buffers()
 
         # Then we stop image acquisition:
-        self.turn_off_cavitar_laser() # FIXME
+        # self.turn_off_cavitar_laser() # FIXME
         self.ia.stop()
 
         # Initialize the drawing state:

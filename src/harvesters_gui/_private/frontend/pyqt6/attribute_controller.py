@@ -129,7 +129,7 @@ class AttributeController(QMainWindow):
         #
         self._combo_box_visibility = QComboBox()
         self._combo_box_visibility.setSizeAdjustPolicy(
-            QComboBox.AdjustToContents
+            QComboBox.SizeAdjustPolicy.AdjustToContents
         )
 
         #
