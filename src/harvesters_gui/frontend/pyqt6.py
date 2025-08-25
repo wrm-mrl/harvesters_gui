@@ -603,6 +603,54 @@ class Harvester(QMainWindow):
         port = self.ia.remote_device.port
         port.write(0x00030D84, struct.pack(">I", 0x00000000))
 
+    
+    def write_to_register(self, reg_addr, value):
+        port = self.ia.remote_device.port
+        port.write(reg_addr, struct.pack(">I", value))
+    
+
+    def pre_start_routine(self):
+        self.write_to_register(0x00030D84, 0x00000004)
+        self.write_to_register(0x0003060C, 0x00000001)
+        self.write_to_register(0x00030608, 0x00000001)
+        self.write_to_register(0x00030D84, 0x00000000)
+        self.write_to_register(0x00030D84, 0x00000000)
+        self.write_to_register(0x00030DA8, 0x00000000)
+        self.write_to_register(0x00030FA8, 0x00000003)
+        self.write_to_register(0x00030D84, 0x00000004)
+        self.write_to_register(0x00030FA4, 0x0000001E)
+        self.write_to_register(0x00030FA8, 0x00000003)
+        self.write_to_register(0x000304A0, 0x00010001)
+        self.write_to_register(0x000304A0, 0x00010001)
+        self.write_to_register(0x00030D84, 0x00000004)
+        self.write_to_register(0x000303E0, 0x00000000)
+        self.write_to_register(0x00030420, 0x00000000)
+        self.write_to_register(0x00030360, 0x000005A0)
+        self.write_to_register(0x000303A0, 0x00000438)
+        self.write_to_register(0x00030610, 0x01080001)
+        self.write_to_register(0x00030608, 0x00000001)
+        self.write_to_register(0x0003060C, 0x00000001)
+        self.write_to_register(0x00030B20, 0x00000001)
+        self.write_to_register(0x00030B04, 0x00000004)
+        self.write_to_register(0x00031028, 0x00000009)
+        self.write_to_register(0x00031200, 0x00000158)
+        self.write_to_register(0x00030840, 0x00000000)
+        self.write_to_register(0x000303E0, 0x00000000)
+        self.write_to_register(0x00030420, 0x00000000)
+        self.write_to_register(0x00030360, 0x000005A0)
+        self.write_to_register(0x000303A0, 0x00000438)
+        self.write_to_register(0x000303E0, 0x00000000)
+        self.write_to_register(0x00030420, 0x00000000)
+        self.write_to_register(0x00030D84, 0x00000000)
+        self.write_to_register(0x00030DA8, 0x00000000)
+        self.write_to_register(0x00030FA8, 0x00000003)
+        self.write_to_register(0x00030D84, 0x00000004)
+        self.write_to_register(0x00030D80, 0x00000000)
+        self.write_to_register(0x00031300, 0x00010064)
+        self.write_to_register(0x0003081C, 0x400927C0)
+        self.write_to_register(0x00030D84, 0x00000000)
+
+
     def action_on_start_image_acquisition(self):
         if self.ia.is_acquiring():
             # If it's pausing drawing images, just resume it and
@@ -615,6 +663,7 @@ class Harvester(QMainWindow):
             self._thread_statistics_measurement.start()
 
             # self.turn_on_cavitar_laser() # FIXME isn't exactly robust
+            self.pre_start_routine()
             self.ia.start()
 
     def is_enabled_on_start_image_acquisition(self):
